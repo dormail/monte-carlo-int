@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include <cmath>
+#include <fstream>
 
 constexpr double pi = 3.1415927;
 
@@ -15,7 +16,7 @@ class point
 		point(double X, double Y) : x(X), y(Y){};
 
 		// set both x and y to random values
-		void random (std::mt19937 gen,
+		void random (std::random_device& gen,
 				double x_min, 
 				double x_max, 
 				double y_min,
@@ -31,15 +32,39 @@ class point
 
 
 
-		// void print(){
-		// 	std::cout << "x =\t" << x 
-		// 		<< "\ny =\t" << y << std::endl;
-		// }
+		void print(){
+			std::cout << "x =\t" << x 
+				<< "\ny =\t" << y << std::endl;
+		}
 };
 
 int main()
 {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
 	point a = point(3,4);
+
+	// a.print();
+	// a.random(rd, -2. ,2. ,-2. ,2.);
+	// a.print();
+	// a.random(rd, -2. ,2. ,-2. ,2.);
+	// a.print();
+
+	std::ofstream output;
+	output.open("ouput.csv");
+	output << "x,y,loc\n";
+	
+	unsigned int run = 1000000;
+	unsigned int i = 0;
+	while(i < run)
+	{
+		i++;
+
+		a.random(rd, -1.,1.,-1.,1.);
+	}
+
+	output.close();
 
 	return 0;
 }
