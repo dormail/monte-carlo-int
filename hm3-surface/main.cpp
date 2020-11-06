@@ -57,11 +57,20 @@ int main()
 	
 	unsigned int run = 1000000;
 	unsigned int i = 0;
+
+	bool inside = true; // a bool which decides if a is inside the shape or not
+	double r = 1.; // the size of the area (and some variable in the function)
+
 	while(i < run)
 	{
 		i++;
 
-		a.random(rd, -1.,1.,-1.,1.);
+		a.random(rd, -1 * r, r,-1 * r,r);
+
+		// checking if point is inside of the shape
+
+
+		output << a.x << "," << a.y << "," << inside << '\n';
 	}
 
 	output.close();
